@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand mb-0 h1" href="#">
+                <img src="~/images/inventory.png" height="30" />
+                Point of Sales Inventory
+            </a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="location.href='@Url.Action("Index","Home")'">
+                            <img src="~/images/dashboard.png" alt="Avatar" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <p class="nav-link">
+                            <img src="~/images/avatar.png" alt="Avatar" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;">
+                            @Session["U_Name"] <span style="font-size:12px;"></span>
+                        </p>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="location.href='@Url.Action("Logout","Login")'">
+                            <img src="~/images/dashboard.png" alt="Avatar" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

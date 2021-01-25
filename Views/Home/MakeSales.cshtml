@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "MakeSales";
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col-6">
+            @* Search Item *@
+            <div class="card">
+                <div class="card-header">Search Item</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Item's code">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+        <div class="col-6">
+            @* Show Searched Item *@
+            <div class="card">
+                <div class="card-header">
+                    Total Bill
+                </div>
+                <div class="card-body">
+                    Total Items: <b>32</b>
+                </div>
+                <div class="card-footer">
+                    Total Bill: <b>1200</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            @* Add Items *@
+            <div class="card">
+                <div class="card-header">Products</div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-light">
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Retail Price</th>
+                                <th scope="col">Product Quantity</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Lays</td>
+                                <td>20</td>
+                                <td><input value="2" type="number" min="0" id="quantity-1" class="form-control" /></td>
+                                <td>40</td>
+                                <td><button class="btn btn-danger">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Calculate Bill</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $("#quantity-1").on('keyup', function () {
+            var price = parseFloat($(this).val())
+            var quantity = parseInt($(this).parent().prev().html())
+            var total = $(this).parent().next()
+
+            total.html(price * quantity)
+        })
+    </script>
+}
