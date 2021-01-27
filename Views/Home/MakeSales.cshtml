@@ -1,11 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "MakeSales";
 }
 
 <section class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
             @* Search Item *@
             <div class="card">
                 <div class="card-header">Search Item</div>
@@ -19,7 +18,7 @@
                 </div>
             </div>        
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             @* Show Searched Item *@
             <div class="card">
                 <div class="card-header">
@@ -77,7 +76,7 @@
             var price = parseFloat($(this).val())
             var quantity = parseInt($(this).parent().prev().html())
             var total = $(this).parent().next()
-
+           
             total.html(price * quantity)
         })
     </script>

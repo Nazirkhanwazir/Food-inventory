@@ -176,6 +176,10 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\MakeSales.cshtml" />
+    <Content Include="Views\Home\AddNewItem.cshtml" />
+    <Content Include="Views\Home\AddStock.cshtml" />
+    <Content Include="Views\Home\StockReport.cshtml" />
+    <Content Include="Views\Home\SalesReport.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

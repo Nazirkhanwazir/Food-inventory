@@ -13,5 +13,21 @@ namespace FoodInventory.Controllers {
         public ActionResult MakeSales() {
             return View();
         }
+
+        public ActionResult AddNewItem() {
+            return View();
+        }
+
+        public ActionResult AddStock() {
+            return View();
+        }
+
+        public ActionResult SalesReport() {
+            return View();
+        }
+
+        public ActionResult StockReport() {
+            return View();
+        }       
     }
 }

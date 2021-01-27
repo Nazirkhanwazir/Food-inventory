@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    Session["Role"] = "SalesPerson";
+    Session["Role"] = "SalesManager";
 }
 
 
@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Add New Item</h5>
                         <p class="card-text">Add new items to the inventory.</p>
-                        <a href="#" onclick="location.href='@Url.Action("AddNI","Home")'" class="btn btn-primary">Add New Item</a>
+                        <a href="home/addnewitem" class="btn btn-primary">Add New Item</a>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Add Stock</h5>
                         <p class="card-text">Add new stock to the inventory.</p>
-                        <a href="#" onclick="location.href='@Url.Action("AddStock","Home")'" class="btn btn-primary">Add Stock</a>
+                        <a href="home/addstock" class="btn btn-primary">Add Stock</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Sales Report</h5>
                         <p class="card-text">Check inventory's sales reports.</p>
-                        <a href="#" onclick="location.href='@Url.Action("saleRp","Home")'" class="btn btn-primary">Sale Report</a>
+                        <a href="home/salesreport" class="btn btn-primary">Sale Report</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Stock Report</h5>
                         <p class="card-text">Check inventory's stock reports.</p>
-                        <a href="#" onclick="location.href='@Url.Action("StockReport","Home")'" class="btn btn-primary">Stock Report</a>
+                        <a href="home/stockreport" class="btn btn-primary">Stock Report</a>
                     </div>
                 </div>
             </div>
