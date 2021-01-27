@@ -9,53 +9,65 @@
             Add New Item
         </div>
         <div class="card-body">
-            <form>
+            @if(ViewBag.Success != null) {
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            }
+
+            @if(ViewBag.Error != null) {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" action="/Home/AddNewItem">
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="Item_No" class="form-control" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item Name</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" name="Item_Name" class="form-control" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Category</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" name="Category" class="form-control" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Brand</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" name="Brand" class="form-control" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Retail Price</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="Retail_Price" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Cost Price</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="Cost_Price" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Threshhold Quantity</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="Cost_Price" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Quantity</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="Quantity" class="form-control">
                     </div>
                 </div>
                 <div class="row">

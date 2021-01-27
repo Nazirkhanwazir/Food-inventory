@@ -16,7 +16,7 @@
     <AssemblyName>FoodInventory</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44369</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,6 +146,36 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Item.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Login.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSInventory.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSInventory.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSInventory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSInventory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSInventory.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Salespersondetail.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sales_Detail.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stock.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +184,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\POSInventory.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>POSInventory.Context.cs</LastGenOutput>
+      <DependentUpon>POSInventory.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\POSInventory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSInventory.edmx</DependentUpon>
+      <LastGenOutput>POSInventory.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\Site.js" />
@@ -164,7 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -172,6 +219,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <EntityDeploy Include="Models\POSInventory.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POSInventory.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\POSInventory.edmx.diagram">
+      <DependentUpon>POSInventory.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Views\Login\Index.cshtml" />
@@ -180,6 +234,9 @@
     <Content Include="Views\Home\AddStock.cshtml" />
     <Content Include="Views\Home\StockReport.cshtml" />
     <Content Include="Views\Home\SalesReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -199,7 +256,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51250</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FoodInventory</IISUrl>
+          <IISUrl>http://localhost:51250/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

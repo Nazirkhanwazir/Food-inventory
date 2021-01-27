@@ -1,4 +1,4 @@
-﻿
+﻿@model FoodInventory.Models.Item
 @{
     ViewBag.Title = "Add Stock";
 }
@@ -10,11 +10,17 @@
             Search Items
         </div>
         <div class="card-body">
-            <form>
+            @if(ViewBag.SearchError != null) {
+                <div class="alert alert-danger">
+                    @ViewBag.SearchError
+                </div>
+            }
+
+            <form method="post" action="/Home/SearchItem">
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input type="number" name="itemNo" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
@@ -31,19 +37,42 @@
             Stock
         </div>
         <div class="card-body">
-            <form>
-                <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label">Quantity</label>
-                    <div class="col-sm-8">
-                        <input type="number" class="form-control">
-                    </div>
+            @if(ViewBag.Success != null) {
+                <div class="alert alert-success">
+                    @ViewBag.Success
                 </div>
-                <div class="row">
-                    <div class="col-sm-8 offset-sm-4">
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </div>
+            }
+            @if(ViewBag.Error != null) {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
                 </div>
-            </form>
+            }
+        <form method="post" action="/Home/AddStock">
+            <input type="hidden" name="Item_No" value="@(Model != null ? Model.Item_No : 0)" class="form-control" required>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Item Name</label>
+                <div class="col-sm-8">
+                    <input type="text" value="@(Model != null ? Model.Item_Name : String.Empty)" class="form-control" required disabled>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Category</label>
+                <div class="col-sm-8">
+                    <input type="text" value="@(Model != null ? Model.Category : String.Empty)" class="form-control" required disabled>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Quantity</label>
+                <div class="col-sm-8">
+                    <input type="number" name="Quantity" min="0" value="@(Model != null ? Model.Quantity : 0)" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 offset-sm-4">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
         </div>
     </div>
 </section>
