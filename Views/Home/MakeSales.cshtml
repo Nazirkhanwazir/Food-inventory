@@ -9,14 +9,16 @@
             <div class="card">
                 <div class="card-header">Search Item</div>
                 <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Item's code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">Search</button>
+                    <form method="post" action="@Url.Action("SearchItem", "WebApi")" id="search-item">
+                        <div class="input-group">
+                            <input type="number" name="itemNo" class="form-control" placeholder="Item No" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>        
+            </div>
         </div>
         <div class="col-md-6">
             @* Show Searched Item *@
@@ -25,10 +27,7 @@
                     Total Bill
                 </div>
                 <div class="card-body">
-                    Total Items: <b>32</b>
-                </div>
-                <div class="card-footer">
-                    Total Bill: <b>1200</b>
+                    Total Bill: <b id="bill">0</b>
                 </div>
             </div>
         </div>
@@ -50,20 +49,11 @@
                                 <th scope="col">Delete</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Lays</td>
-                                <td>20</td>
-                                <td><input value="2" type="number" min="0" id="quantity-1" class="form-control" /></td>
-                                <td>40</td>
-                                <td><button class="btn btn-danger">Delete</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="items"></tbody>
                     </table>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">Calculate Bill</button>
+                    <button class="btn btn-primary" id="calculate">Calculate Bill</button>
                 </div>
             </div>
         </div>
@@ -72,12 +62,66 @@
 
 @section scripts {
     <script>
-        $("#quantity-1").on('keyup', function () {
-            var price = parseFloat($(this).val())
-            var quantity = parseInt($(this).parent().prev().html())
-            var total = $(this).parent().next()
-           
-            total.html(price * quantity)
+        var items = []
+
+        $("#search-item").on('submit', function (e) {
+            e.preventDefault();
+
+            var data = {};
+
+            $.each($(this).serializeArray(), function (i, field) {
+                data[field.name] = field.value;
+            });
+
+            $.ajax({
+                url: "/api" + $(this).attr("action") + "?itemNo=" + data["itemNo"],
+                type: $(this).attr("method"),
+                contenttype: "json",
+                success: function (res) {
+                    var found = items.find(i => i.Item_No == res.Item_No)
+
+                    if (found) {
+                        alert("This item already exists.");
+                        return;
+                    }
+
+                    items.push(res)
+
+                    var el = `<tr>
+                            <th scope="row">${items.length}</th>
+                            <td>${res["Item_Name"]}</td>
+                            <td>${res["Retail_Price"] ?? 0}</td>
+                            <td><input value="0" type="number" min="0" data-quantity class="form-control" /></td>
+                            <td>0</td>
+                            <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>`;
+
+                    $("#items").append(el);
+
+                    $("#items input").each(function () {
+                        console.log(339)
+                        $(this).on('keyup', function (e) {
+                            e.stopPropagation();
+                            console.log($(this))
+                            var price = parseFloat($(this).val())
+                            var quantity = parseInt($(this).parent().prev().html())
+                            var total = $(this).parent().next()
+
+                            total.html(price * quantity)
+                        })
+                    })
+                },
+                error: function (err) {
+                    alert("This item does not exist");
+                }
+            });
+        });
+
+        $("#calculate").on('click', function (e) {
+            console.log(3)
+            var total = items.reduce((t, i) => t + (parseFloat(i.Retail_Price) * 1), 0)
+            $("#bill").html(total);
         })
+
     </script>
 }

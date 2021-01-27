@@ -16,7 +16,7 @@
                 </div>
             }
 
-            <form method="post" action="/Home/SearchItem">
+            <form method="post" action="@Url.Action("SearchItem", "Home")">
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item No</label>
                     <div class="col-sm-8">
@@ -47,7 +47,7 @@
                     @ViewBag.Error
                 </div>
             }
-        <form method="post" action="/Home/AddStock">
+        <form method="post" action="@Url.Action("AddStock", "Home")">
             <input type="hidden" name="Item_No" value="@(Model != null ? Model.Item_No : 0)" class="form-control" required>
             <div class="mb-3 row">
                 <label class="col-sm-4 col-form-label">Item Name</label>

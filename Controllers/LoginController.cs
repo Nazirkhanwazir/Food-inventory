@@ -35,7 +35,7 @@ namespace FoodInventory.Controllers
             }
 
             ViewBag.Error = "Invalid login credentials.";
-            return View("Index");
+            return View();
         }
 
         public ActionResult Logout() {
