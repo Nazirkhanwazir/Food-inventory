@@ -23,12 +23,20 @@ namespace FoodInventory.Controllers
 
         [HttpPost]
         public ActionResult Index(string username, string password) {
-            var login = db.Logins.Where(u => u.U_Name.Equals(username) && u.Password.ToString() == password).FirstOrDefault();
+            Login login = db.Logins.Where(u => u.U_Name.Equals(username) && u.Password.ToString() == password).FirstOrDefault();
 
             if(login != null) {
                 Session["U_Name"] = login.U_Name.ToString();
                 Session["Password"] = login.Password.ToString();
                 Session["Role"] = login.Role.ToString();
+
+                if(login.Role.ToString().Equals("SalesPerson")) {
+                    Salespersondetail sp = db.Salespersondetails.Where(x => x.Salesperson.Equals(login.U_Name)).FirstOrDefault();
+                    
+                    Session["Totalsale"] = sp.Totalsale.ToString();
+                    Session["Loginammount"] = sp.Loginammount.ToString();
+                    Session["Logoutammount"] = sp.Logoutammount.ToString();
+                }                
 
                 return RedirectToAction("Index", "Home");
 

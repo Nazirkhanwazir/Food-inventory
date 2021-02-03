@@ -29,6 +29,16 @@ namespace FoodInventory.Controllers
                 var lastSale = db.Sales_Detail.OrderByDescending(s => s.id).FirstOrDefault();
                 int id = 1;
 
+                Salespersondetail spd = db.Salespersondetails.Where(x => x.Salesperson == lastSale.Saleperson).FirstOrDefault();
+
+                spd.Totalsale = spd.Totalsale += 1;
+
+                saleDetail.ForEach(x => {
+                    spd.Loginammount = spd.Loginammount + (x.Price * x.Item_Quantity);                     
+                });
+
+                db.SaveChanges();
+
                 if(lastSale != null) {
                     id = lastSale.id + 1;
                 }

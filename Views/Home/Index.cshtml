@@ -4,6 +4,14 @@
 
 <section class="container">
     @if(Session["Role"].Equals("SalesPerson")) {
+        <div class="row pb-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Login Amount</div>
+                    <div class="card-body">@Session["Loginammount"]</div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-3">
                 <div class="card">
@@ -17,6 +25,21 @@
             </div>
         </div>
     } else {
+        <div class="row pb-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Set Login Amount</div>
+                    <div class="card-body">
+                        <form action="@Url.Action("Index", "Home")" method="post">
+                            <div class="input-group">
+                                <input name="amount" class="form-control" />
+                                <button type="submit" class="btn btn-success">Set</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="card">

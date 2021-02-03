@@ -9,12 +9,26 @@ namespace FoodInventory.Controllers {
     public class HomeController : Controller {
         POS_InventoryEntities db = new POS_InventoryEntities();
 
+        [HttpGet]
         public ActionResult Index() {
             if(Session["U_Name"] != null) {
                 return View();
             }
 
             return RedirectToAction("Index", "Login");
+        }
+
+        [HttpPost]
+        public ActionResult Index(int? amount) {
+            List<Salespersondetail> sps = db.Salespersondetails.ToList();
+
+            sps.ForEach(x => {
+                x.Loginammount = amount;
+            });
+
+            db.SaveChanges();
+
+            return View();
         }
 
         public ActionResult MakeSales() {
