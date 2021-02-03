@@ -42,6 +42,7 @@
                         <thead>
                             <tr class="table-light">
                                 <th scope="col">#</th>
+                                <th scope="col">Item No</th>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Retail Price</th>
                                 <th scope="col">Product Quantity</th>
@@ -89,6 +90,7 @@
 
                     var el = `<tr>
                             <th scope="row">${items.length}</th>
+                            <td>${res["Item_No"]}</td>
                             <td>${res["Item_Name"]}</td>
                             <td>${res["Retail_Price"] ?? 0}</td>
                             <td><input value="0" type="number" min="0" data-quantity class="form-control" /></td>
@@ -96,18 +98,38 @@
                             <td><button class="btn btn-danger">Delete</button></td>
                         </tr>`;
 
-                    $("#items").append(el);
+                    $("#items").append(el)
 
                     $("#items input").each(function () {
-                        console.log(339)
                         $(this).on('keyup', function (e) {
-                            e.stopPropagation();
-                            console.log($(this))
-                            var price = parseFloat($(this).val())
-                            var quantity = parseInt($(this).parent().prev().html())
-                            var total = $(this).parent().next()
+                            e.stopPropagation()
+                            var itemNo = $(this).parent().parent().children().first().next().html()
+                            var quantity = parseFloat($(this).val())
+                            var price = parseInt($(this).parent().prev().html())
+                            var totalElement = $(this).parent().next()
 
-                            total.html(price * quantity)
+                            var item = items.find(i => i.Item_No == itemNo)
+
+                            if (quantity > item.Quantity) {
+                                alert("Quantity cannot be greater than item's quantity");
+                                return
+                            }
+
+                            var total = price * quantity;
+
+                            totalElement.html(total)
+
+                            item.saleQuantity = quantity
+                            item.totalPrice = total;
+                        })
+                    })
+
+                    $("#items button").each(function () {
+                        $(this).on('click', function (e) {
+                            e.stopPropagation()
+                            var itemNo = $(this).parent().parent().children().first().next().html()
+                            items = items.filter(i => i.Item_No != itemNo)
+                            $(this).parent().parent().remove()
                         })
                     })
                 },
@@ -118,9 +140,32 @@
         });
 
         $("#calculate").on('click', function (e) {
-            console.log(3)
-            var total = items.reduce((t, i) => t + (parseFloat(i.Retail_Price) * 1), 0)
+            var total = items.reduce((t, i) => t + i.totalPrice, 0)
             $("#bill").html(total);
+
+            var saleDetail = items.map(i => ({
+                Saleperson: "@Session["U_Name"]",
+                Item_No: i.Item_No,
+                Item_Quantity: i.saleQuantity,
+                Price: i.Retail_Price,
+                Sale_Date: new Date()
+            }))
+
+            console.log(saleDetail)
+
+            $.ajax({
+                url: "/api/WebApi/MakeSale",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(saleDetail),
+                success: function (res) {
+                    alert("Sale Added");
+                    window.location = window.location;
+                },
+                error: function (err) {
+                    alert("Failed to make sale.");
+                }
+            });
         })
 
     </script>

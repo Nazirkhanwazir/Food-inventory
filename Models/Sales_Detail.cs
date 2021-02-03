@@ -14,16 +14,12 @@ namespace FoodInventory.Models
     
     public partial class Sales_Detail
     {
+        public int id { get; set; }
         public Nullable<int> Sale_Id { get; set; }
+        public string Sale_Date { get; set; }
         public Nullable<int> Item_No { get; set; }
         public Nullable<int> Item_Quantity { get; set; }
         public Nullable<int> Price { get; set; }
         public string Saleperson { get; set; }
-        public int id { get; set; }
-        public Nullable<System.DateTime> Sale_Date { get; set; }
-        public string Category { get; set; }
-        public string Item_Name { get; set; }
-        public Nullable<int> Customer_Id { get; set; }
-        public string Customer_Name { get; set; }
     }
 }

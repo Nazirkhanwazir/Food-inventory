@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c02090dc9559409f8384983925702f64" Name="Diagram1">
-        <EntityTypeShape EntityType="POS_InventoryModel.Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Login" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Sales_Detail" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Salespersondetail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Stock" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Item" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Login" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Sales_Detail" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Salespersondetail" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Stock" Width="1.5" PointX="4.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
