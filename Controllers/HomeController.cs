@@ -84,6 +84,12 @@ namespace FoodInventory.Controllers {
 
                     db.Entry(item).Property(i => i.Quantity).IsModified = true;
                     db.SaveChanges();
+
+                    Stock s = new Stock { Stock_Date = DateTime.Now.ToString(), Category = item.Category, Quantity = item.Quantity, Brand = item.Brand, Item_No = item.Item_No, Item_Name = item.Item_Name };
+
+                    db.Stocks.Add(s);
+                    db.SaveChanges();
+
                     ViewBag.Success = "Updated successfully.";
                 }
             } catch(Exception ex) {
