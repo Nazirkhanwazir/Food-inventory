@@ -3,6 +3,17 @@
 }
 
 <section class="container">
+    <div class="modal fade" id="barcode-scan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan Products</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="barcode-scan-area"></div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             @* Search Item *@
@@ -14,6 +25,7 @@
                             <input type="number" name="itemNo" class="form-control" placeholder="Item No" required>
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">Search</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#barcode-scan">Scan</button>
                             </div>
                         </div>
                     </form>
@@ -65,17 +77,9 @@
     <script>
         var items = []
 
-        $("#search-item").on('submit', function (e) {
-            e.preventDefault();
-
-            var data = {};
-
-            $.each($(this).serializeArray(), function (i, field) {
-                data[field.name] = field.value;
-            });
-
+        function searchItem(itemNo) {
             $.ajax({
-                url: "/api" + $(this).attr("action") + "?itemNo=" + data["itemNo"],
+                url: "/api" + $(this).attr("action") + "?itemNo=" + itemNo,
                 type: $(this).attr("method"),
                 contenttype: "json",
                 success: function (res) {
@@ -134,10 +138,22 @@
                     })
                 },
                 error: function (err) {
-                    alert("This item does not exist");
+                    alert("This item does not exist")
                 }
-            });
-        });
+            })
+        }
+
+        $("#search-item").on('submit', function (e) {
+            e.preventDefault()
+
+            var data = {}
+
+            $.each($(this).serializeArray(), function (i, field) {
+                data[field.name] = field.value
+            })
+
+            searchItem(data["itemNo"])
+        })
 
         $("#calculate").on('click', function (e) {
             var total = items.reduce((t, i) => t + i.totalPrice, 0)
@@ -163,10 +179,48 @@
                     window.location = window.location;
                 },
                 error: function (err) {
-                    alert("Failed to make sale.");
+                    alert("Failed to make sale.")
                 }
-            });
+            })
         })
 
+
+        //BAR CODE SCANNER CODE               
+        var barcodeScanEl = document.getElementById('barcode-scan')
+
+        Quagga.onDetected(function (result) {
+            var code = result.codeResult.code;
+
+            console.log(code)
+            searchItem(code)
+
+            bootstrap.Modal.getInstance(barcodeScanEl).hide()
+
+            Quagga.stop()
+        });         
+
+        barcodeScanEl.addEventListener('hide.bs.modal', function (event) {
+            Quagga.stop()
+        })
+
+        barcodeScanEl.addEventListener('show.bs.modal', function (event) {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#barcode-scan-area'),
+                },
+                decoder: {
+                    readers: ["ean_reader"]
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err)
+                    return
+                }
+                    console.log("Initialization finished. Ready to start")
+                    Quagga.start()
+            })            
+        })          
     </script>
 }
