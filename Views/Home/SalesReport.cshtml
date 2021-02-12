@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<FoodInventory.Models.Sales_Detail>
 @{
     ViewBag.Title = "Sales Report";
 }
@@ -9,23 +9,35 @@
             Sales Report
         </div>
         <div class="card-body">
-            <form>
+            @if(ViewBag.Success != null) {
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            }
+
+            @if(ViewBag.Error != null) {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" action="@Url.Action("SalesReport", "Home")">
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">From</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control">
+                        <input name="from" type="date" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">To</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control">
+                        <input name="to" type="date" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input name="code" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="row">
@@ -36,4 +48,29 @@
             </form>
         </div>
     </div>
+
+    @if(Model != null) {
+        <div class="row">
+            <div class="col-md-6 mx-auto mb-5">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-light">
+                            <th scope="col">Item No</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Total Sale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model) {
+                            <tr>
+                                <td>@item.Item_No</td>
+                                <td>@item.Sale_Date</td>
+                                <td>@(item.Price * item.Item_Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 </section>

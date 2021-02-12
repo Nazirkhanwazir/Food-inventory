@@ -111,6 +111,7 @@ namespace FoodInventory.Controllers {
             return View("AddStock");
         } 
 
+        [HttpGet]
         public ActionResult SalesReport() {
             if(Session["U_Name"] != null) {
                 return View();
@@ -119,12 +120,35 @@ namespace FoodInventory.Controllers {
             return RedirectToAction("Index", "Login");
         }
 
+        [HttpPost]
+        public ActionResult SalesReport(string from, string to, string code) {
+            try {
+                List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code)).ToList();
+
+                if(sales.Count < 1) {
+                    ViewBag.Error = "No Sale Records.";
+                } else {
+                    return View(sales);
+                }
+            } catch (Exception ex) {
+                ViewBag.Error = "Fail to get Sales Report.";
+            }
+
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult StockReport() {
             if(Session["U_Name"] != null) {
                 return View();
             }
 
             return RedirectToAction("Index", "Login");
-        }       
+        }
+
+        [HttpPost]
+        public ActionResult StockReport(string from, string to, string code) {
+            return View();
+        }
     }
 }

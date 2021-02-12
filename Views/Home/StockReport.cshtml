@@ -9,23 +9,35 @@
             Stock Report
         </div>
         <div class="card-body">
-            <form>
+            @if(ViewBag.Success != null) {
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            }
+
+            @if(ViewBag.Error != null) {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" action="@Url.Action("StockReport", "Home")">
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">From</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control">
+                        <input name="from" type="date" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">To</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control">
+                        <input name="to" type="date" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Item No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control">
+                        <input name="code" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="row">
