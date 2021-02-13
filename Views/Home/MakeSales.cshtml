@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-header">Search Item</div>
                 <div class="card-body">
-                    <form method="post" action="@Url.Action("SearchItem", "WebApi")" id="search-item">
+                    <form id="search-item">
                         <div class="input-group">
                             <input type="number" name="itemNo" class="form-control" placeholder="Item No" required>
                             <div class="input-group-append">
@@ -79,8 +79,8 @@
 
         function searchItem(itemNo) {
             $.ajax({
-                url: "/api" + $(this).attr("action") + "?itemNo=" + itemNo,
-                type: $(this).attr("method"),
+                url: "/api/webapi/SearchItem?itemNo=" + itemNo,
+                type: "GET",
                 contenttype: "json",
                 success: function (res) {
                     var found = items.find(i => i.Item_No == res.Item_No)
