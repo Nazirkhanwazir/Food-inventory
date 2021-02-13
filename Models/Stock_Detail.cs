@@ -12,14 +12,12 @@ namespace FoodInventory.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Stock
+    public partial class Stock_Detail
     {
-        public int Stock_Id { get; set; }
-        public string Stock_Date { get; set; }
-        public string Category { get; set; }
-        public Nullable<int> Item_No { get; set; }
-        public string Item_Name { get; set; }
+        public int Sid { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<long> Itemno { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public string Brand { get; set; }
+        public string Time { get; set; }
     }
 }

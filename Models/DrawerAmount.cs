@@ -12,15 +12,9 @@ namespace FoodInventory.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class DrawerAmount
     {
-        public long Item_No { get; set; }
-        public string Item_Name { get; set; }
-        public string Category { get; set; }
-        public string Brand { get; set; }
-        public Nullable<int> Cost_Price { get; set; }
-        public Nullable<int> Retail_Price { get; set; }
-        public Nullable<int> Threshhold_Quantity { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public int d_id { get; set; }
+        public Nullable<int> Drawer_amount { get; set; }
     }
 }

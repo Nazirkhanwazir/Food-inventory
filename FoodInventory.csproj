@@ -147,6 +147,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Drawer.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DrawerAmount.cs">
+      <DependentUpon>POSInventory.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Item.cs">
       <DependentUpon>POSInventory.tt</DependentUpon>
     </Compile>
@@ -174,7 +180,7 @@
     <Compile Include="Models\Sales_Detail.cs">
       <DependentUpon>POSInventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Stock.cs">
+    <Compile Include="Models\Stock_Detail.cs">
       <DependentUpon>POSInventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<FoodInventory.Models.Stock_Detail>
 @{
     ViewBag.Title = "Stock Report";
 }
@@ -48,5 +48,30 @@
             </form>
         </div>
     </div>
+
+    @if(Model != null) {
+        <div class="row">
+            <div class="col-md-6 mx-auto mb-5">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-light">
+                            <th scope="col">Date</th>
+                            <th scope="col">Item No</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model) {
+                            <tr>
+                                <td>@item.Date</td>
+                                <td>@item.Itemno</td>
+                                <td>@(item.Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 </section>
 

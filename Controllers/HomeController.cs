@@ -80,14 +80,9 @@ namespace FoodInventory.Controllers {
                 } else {
                     db.Items.Attach(item);
 
-                    item.Quantity = newItem.Quantity;
+                    item.Quantity += newItem.Quantity;
 
                     db.Entry(item).Property(i => i.Quantity).IsModified = true;
-                    db.SaveChanges();
-
-                    Stock s = new Stock { Stock_Date = DateTime.Now.ToString(), Category = item.Category, Quantity = item.Quantity, Brand = item.Brand, Item_No = item.Item_No, Item_Name = item.Item_Name };
-
-                    db.Stocks.Add(s);
                     db.SaveChanges();
 
                     ViewBag.Success = "Updated successfully.";
@@ -121,8 +116,9 @@ namespace FoodInventory.Controllers {
         }
 
         [HttpPost]
-        public ActionResult SalesReport(string from, string to, string code) {
+        public ActionResult SalesReport(DateTime? from, DateTime? to, string code) {
             try {
+                //List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code) && from >= x.Sale_Date && to <= x.Sale_Date ).ToList();
                 List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code)).ToList();
 
                 if(sales.Count < 1) {
@@ -148,6 +144,19 @@ namespace FoodInventory.Controllers {
 
         [HttpPost]
         public ActionResult StockReport(string from, string to, string code) {
+            try {
+                //List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code) && from >= x.Sale_Date && to <= x.Sale_Date).ToList();
+                List<Stock_Detail> stocks = db.Stock_Detail.ToList().Where(x => x.Itemno.ToString().Equals(code)).ToList();
+
+                if(stocks.Count < 1) {
+                    ViewBag.Error = "No Stock Records.";
+                } else {
+                    return View(stocks);
+                }
+            } catch(Exception ex) {
+                ViewBag.Error = "Fail to get Stock Report.";
+            }
+
             return View();
         }
     }

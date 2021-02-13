@@ -25,10 +25,12 @@ namespace FoodInventory.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Drawer> Drawers { get; set; }
+        public virtual DbSet<DrawerAmount> DrawerAmounts { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Sales_Detail> Sales_Detail { get; set; }
         public virtual DbSet<Salespersondetail> Salespersondetails { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<Stock_Detail> Stock_Detail { get; set; }
     }
 }

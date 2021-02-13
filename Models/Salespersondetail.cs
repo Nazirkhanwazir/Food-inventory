@@ -21,5 +21,6 @@ namespace FoodInventory.Models
         public Nullable<int> Logoutammount { get; set; }
         public int id { get; set; }
         public string Time { get; set; }
+        public string Counter { get; set; }
     }
 }

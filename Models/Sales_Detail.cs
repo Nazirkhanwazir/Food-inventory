@@ -16,8 +16,8 @@ namespace FoodInventory.Models
     {
         public int id { get; set; }
         public Nullable<int> Sale_Id { get; set; }
-        public string Sale_Date { get; set; }
-        public Nullable<int> Item_No { get; set; }
+        public Nullable<System.DateTime> Sale_Date { get; set; }
+        public Nullable<long> Item_No { get; set; }
         public Nullable<int> Item_Quantity { get; set; }
         public Nullable<int> Price { get; set; }
         public string Saleperson { get; set; }
