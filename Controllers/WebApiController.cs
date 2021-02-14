@@ -10,7 +10,7 @@ namespace FoodInventory.Controllers
 {
     public class WebApiController : ApiController
     {
-        POS_InventoryEntities db = new POS_InventoryEntities();
+        POS_InventoryEntities1 db = new POS_InventoryEntities1();
         
         [HttpGet]
         public HttpResponseMessage SearchItem(int itemNo) {

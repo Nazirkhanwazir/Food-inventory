@@ -3,84 +3,97 @@
 }
 
 <section class="container">
-    @if(Session["Role"].Equals("SalesPerson")) {
-        <div class="row pb-5">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Login Amount</div>
-                    <div class="card-body">@Session["Loginammount"]</div>
+    @if (Session["Role"].Equals("SalesPerson"))
+    { <div class="row pb-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Login Amount</div>
+                <div class="card-body">@Session["Loginammount"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/images/RR-SupportIcon-Sales.png">
+                <div class="card-body">
+                    <h5 class="card-title">Make Sales</h5>
+                    <p class="card-text">Here you can make your sales.</p>
+                    <a href="@Url.Action("MakeSales", "Home")" class="btn btn-primary">Make Sales</a>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="card">
-                    <img class="card-img-top" style="height: 200px" src="~/images/RR-SupportIcon-Sales.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Make Sales</h5>
-                        <p class="card-text">Here you can make your sales.</p>
-                        <a href="@Url.Action("MakeSales", "Home")" class="btn btn-primary">Make Sales</a>
-                    </div>
+    </div>
+}
+else
+{
+    <div class="row pb-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Set Login Amount</div>
+                <div class="card-body">
+                    <form action="@Url.Action("Index", "Home")" method="post">
+                        <div class="input-group">
+                            <input name="amount" class="form-control" />
+                            <button type="submit" class="btn btn-success">Set</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    } else {
-        <div class="row pb-5">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Set Login Amount</div>
-                    <div class="card-body">
-                        <form action="@Url.Action("Index", "Home")" method="post">
-                            <div class="input-group">
-                                <input name="amount" class="form-control" />
-                                <button type="submit" class="btn btn-success">Set</button>
-                            </div>
-                        </form>
-                    </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/images/Packed-Products-Icon.png">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Item</h5>
+                    <p class="card-text">Add new items to the inventory.</p>
+                    <a href="@Url.Action("AddNewItem", "Home")" class="btn btn-primary">Add New Item</a>
                 </div>
             </div>
         </div>
-        <div class="row mb-5">
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top" style="height: 200px" src="~/images/Packed-Products-Icon.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Add New Item</h5>
-                        <p class="card-text">Add new items to the inventory.</p>
-                        <a href="@Url.Action("AddNewItem", "Home")" class="btn btn-primary">Add New Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top" style="height: 200px" src="~/images/iconfinder_growth_3890929.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Add Stock</h5>
-                        <p class="card-text">Add new stock to the inventory.</p>
-                        <a href="@Url.Action("AddStock", "Home")" class="btn btn-primary">Add Stock</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top" style="height: 200px" src="~/images/th.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Sales Report</h5>
-                        <p class="card-text">Check inventory's sales reports.</p>
-                        <a href="@Url.Action("SalesReport", "Home")" class="btn btn-primary">Sale Report</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top" style="height: 200px" src="~/images/iconfinder_Stock_2530777.png">
-                    <div class="card-body">
-                        <h5 class="card-title">Stock Report</h5>
-                        <p class="card-text">Check inventory's stock reports.</p>
-                        <a href="@Url.Action("StockReport", "Home")" class="btn btn-primary">Stock Report</a>
-                    </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/image/edititem.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">Edit Item</h5>
+                    <p class="card-text">Edit the items in inventory.</p>
+                    <a href="@Url.Action("EditItem", "Home")" class="btn btn-primary">Edit Item</a>
                 </div>
             </div>
         </div>
-    }
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/images/iconfinder_growth_3890929.png">
+                <div class="card-body">
+                    <h5 class="card-title">Add Stock</h5>
+                    <p class="card-text">Add new stock to the inventory.</p>
+                    <a href="@Url.Action("AddStock", "Home")" class="btn btn-primary">Add Stock</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/images/th.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">Sales Report</h5>
+                    <p class="card-text">Check inventory's sales reports.</p>
+                    <a href="@Url.Action("SalesReport", "Home")" class="btn btn-primary">Sale Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" style="height: 200px" src="~/images/iconfinder_Stock_2530777.png">
+                <div class="card-body">
+                    <h5 class="card-title">Stock Report</h5>
+                    <p class="card-text">Check inventory's stock reports.</p>
+                    <a href="@Url.Action("StockReport", "Home")" class="btn btn-primary">Stock Report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 </section>

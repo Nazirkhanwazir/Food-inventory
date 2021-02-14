@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\theah\source\repos\FoodInventory\Models\POSInventory.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Nazir khan\source\repos\Food-inventoryN\Models\POSInventory.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

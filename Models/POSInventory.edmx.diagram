@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c02090dc9559409f8384983925702f64" Name="Diagram1">
-        <EntityTypeShape EntityType="POS_InventoryModel.Drawer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.DrawerAmount" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Item" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Login" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Sales_Detail" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Salespersondetail" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="POS_InventoryModel.Stock_Detail" Width="1.5" PointX="6.75" PointY="0.75" />
+      <Diagram DiagramId="574523a142ea41c8b7a9ed78c1421342" Name="Diagram1">
+        <EntityTypeShape EntityType="POS_InventoryModel.Drawer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.DrawerAmount" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Item" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Login" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Sales_Detail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Salespersondetail" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POS_InventoryModel.Stock_Detail" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

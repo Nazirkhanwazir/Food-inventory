@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -132,9 +135,6 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -191,10 +191,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\edititem.jpg" />
     <Content Include="Models\POSInventory.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>POSInventory.Context.cs</LastGenOutput>
       <DependentUpon>POSInventory.edmx</DependentUpon>
+      <LastGenOutput>POSInventory.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\POSInventory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -242,6 +243,7 @@
     <Content Include="Views\Home\AddStock.cshtml" />
     <Content Include="Views\Home\StockReport.cshtml" />
     <Content Include="Views\Home\SalesReport.cshtml" />
+    <Content Include="Views\Home\EditItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

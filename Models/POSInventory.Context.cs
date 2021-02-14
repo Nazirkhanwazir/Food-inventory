@@ -13,10 +13,10 @@ namespace FoodInventory.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class POS_InventoryEntities : DbContext
+    public partial class POS_InventoryEntities1 : DbContext
     {
-        public POS_InventoryEntities()
-            : base("name=POS_InventoryEntities")
+        public POS_InventoryEntities1()
+            : base("name=POS_InventoryEntities1")
         {
         }
     

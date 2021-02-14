@@ -9,7 +9,7 @@ namespace FoodInventory.Controllers
 {
     public class LoginController : Controller
     {
-        POS_InventoryEntities db = new POS_InventoryEntities();
+        POS_InventoryEntities1 db = new POS_InventoryEntities1();
 
         [HttpGet]
         public ActionResult Index()
