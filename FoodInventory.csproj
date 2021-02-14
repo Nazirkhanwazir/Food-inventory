@@ -192,6 +192,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="image\edititem.jpg" />
+    <Content Include="image\saleperson.png" />
     <Content Include="Models\POSInventory.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>POSInventory.edmx</DependentUpon>
