@@ -34,8 +34,10 @@ namespace FoodInventory.Controllers
                 spd.Totalsale = spd.Totalsale += 1;
 
                 saleDetail.ForEach(x => {
-                    spd.Loginammount = spd.Loginammount + (x.Price * x.Item_Quantity);                     
+                    spd.Loginammount = spd.Loginammount + (x.Price * x.Item_Quantity); 
+                    
                 });
+               
 
                 db.SaveChanges();
 

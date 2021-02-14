@@ -24,7 +24,7 @@ namespace FoodInventory.Controllers
 
         [HttpPost]
         public ActionResult Index(int? amount)
-        {
+        { 
             
             List <Salespersondetail> sps = db.Salespersondetails.ToList();
 
@@ -271,6 +271,45 @@ namespace FoodInventory.Controllers
             }
 
             return View();
+        }
+        [HttpGet]
+        public ActionResult SalePersonDetails()
+        {
+            if (Session["U_Name"] != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Login");
+        }
+        [HttpPost]
+        public ActionResult SalePersonDetails(Salespersondetail newItem)
+        {
+            try
+            {
+                Salespersondetail item = db.Salespersondetails.Find(newItem.Salesperson);
+
+                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.salepersonfound = "sale person found.";
+            }
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SalePersonSearch(string itemNo)
+        {
+            Salespersondetail item = db.Salespersondetails.FirstOrDefault(i => i.Salesperson == itemNo);
+
+            if (item != null)
+            {
+                return View("SalePersonDetails", item);
+            }
+
+            ViewBag.SearchError = "Sale Person '" + itemNo + "' not found.";
+            return View("SalePersonDetails");
         }
     }
 
