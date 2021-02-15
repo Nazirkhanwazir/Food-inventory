@@ -13,7 +13,7 @@ namespace FoodInventory.Controllers
         POS_InventoryEntities1 db = new POS_InventoryEntities1();
         
         [HttpGet]
-        public HttpResponseMessage SearchItem(int itemNo) {
+        public HttpResponseMessage SearchItem(long itemNo) {
             try {
                 Item item = db.Items.First(i => i.Item_No == itemNo);
 

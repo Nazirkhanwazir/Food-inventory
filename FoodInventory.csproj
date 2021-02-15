@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -191,6 +191,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\avatar.png" />
+    <Content Include="Images\dashboard.png" />
+    <Content Include="Images\iconfinder_growth_3890929.png" />
+    <Content Include="Images\iconfinder_Stock_2530777.png" />
+    <Content Include="Images\inventory.png" />
+    <Content Include="Images\login.jpg" />
+    <Content Include="Images\logout.png" />
+    <Content Include="Images\Packed-Products-Icon.png" />
+    <Content Include="Images\RR-SupportIcon-Sales.png" />
+    <Content Include="Images\th.jpg" />
     <Content Include="image\edititem.jpg" />
     <Content Include="image\saleperson.png" />
     <Content Include="Models\POSInventory.Context.tt">
@@ -246,6 +256,7 @@
     <Content Include="Views\Home\SalesReport.cshtml" />
     <Content Include="Views\Home\EditItem.cshtml" />
     <Content Include="Views\Home\SalePersonDetails.cshtml" />
+    <Content Include="Views\Home\_LargeAmount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

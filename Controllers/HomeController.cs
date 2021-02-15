@@ -16,6 +16,8 @@ namespace FoodInventory.Controllers
         {
             if (Session["U_Name"] != null)
             {
+                var users = db.Logins.ToList();
+                ViewBag.Users = users;
                 return View();
             }
 
@@ -23,10 +25,12 @@ namespace FoodInventory.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int? amount)
-        { 
-            
-            List <Salespersondetail> sps = db.Salespersondetails.ToList();
+        public ActionResult Index(int? amount,string user)
+        {
+            POS_InventoryEntities1 db = new POS_InventoryEntities1();
+
+            //List <Salespersondetail> sps = db.Salespersondetails.Where(x=>x.Salesperson.ToLower()==(user??"").ToLower()).ToList();
+            List<Salespersondetail> sps = db.Salespersondetails.ToList();
 
             sps.ForEach(x =>
             {
@@ -34,8 +38,10 @@ namespace FoodInventory.Controllers
             });
            
             db.SaveChanges();
-
-            return View();
+            var users = db.Logins.ToList();
+            ViewBag.Users = users;
+            return View(from Salespersondetail in db.Salespersondetails select Salespersondetail);
+           // return View();
         }
 
         public ActionResult MakeSales()
@@ -310,6 +316,20 @@ namespace FoodInventory.Controllers
 
             ViewBag.SearchError = "Sale Person '" + itemNo + "' not found.";
             return View("SalePersonDetails");
+        }
+
+        public ActionResult LargeAmount()
+        {
+            try
+            {
+                var list = db.Salespersondetails.Where(x => x.Loginammount > 15).ToList();
+                return PartialView("_LargeAmount",list);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 

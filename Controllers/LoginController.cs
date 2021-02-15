@@ -31,7 +31,7 @@ namespace FoodInventory.Controllers
                 Session["Role"] = login.Role.ToString();
 
                 if(login.Role.ToString().Equals("SalesPerson")) {
-                    Salespersondetail sp = db.Salespersondetails.Where(x => x.Salesperson.Equals(login.U_Name)).FirstOrDefault();
+                    Salespersondetail sp = db.Salespersondetails.Where(x => x.Salesperson.ToLower().Equals(login.U_Name.ToLower())).FirstOrDefault();
                     
                     if(sp != null) {
                         Session["Totalsale"] = sp.Totalsale.ToString();
@@ -49,6 +49,13 @@ namespace FoodInventory.Controllers
         }
 
         public ActionResult Logout() {
+            if (Session["Role"].ToString().Equals("SalesPerson"))
+            {
+                var str = Session["U_Name"].ToString();
+                Salespersondetail sp = db.Salespersondetails.FirstOrDefault(x => x.Salesperson.ToLower() == str.ToLower());
+                sp.Logoutammount = sp.Loginammount;
+                db.SaveChanges();
+            }
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }

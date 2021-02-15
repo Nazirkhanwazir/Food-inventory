@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FoodInventory.Models.Salespersondetail>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Salesperson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loginammount)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr >
+            <td class="alert-danger">
+                @Html.DisplayFor(modelItem => item.Salesperson)
+            </td>
+            <td class="alert-danger">
+                @Html.DisplayFor(modelItem => item.Loginammount)
+            </td>
+
+        </tr>
+    }
+    @if (Model.Count() < 1)
+    {
+        <tr>
+            <td colspan="2" style="text-align:center" class="alert-danger">
+                No data found.
+            </td>
+            
+        </tr>
+    }
+</table>
