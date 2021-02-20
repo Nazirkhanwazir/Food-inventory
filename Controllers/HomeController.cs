@@ -25,23 +25,23 @@ namespace FoodInventory.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int? amount,string user)
+        public ActionResult Index(int? amount, string user)
         {
             POS_InventoryEntities1 db = new POS_InventoryEntities1();
 
-            //List <Salespersondetail> sps = db.Salespersondetails.Where(x=>x.Salesperson.ToLower()==(user??"").ToLower()).ToList();
+            
             List<Salespersondetail> sps = db.Salespersondetails.ToList();
 
             sps.ForEach(x =>
             {
                 x.Loginammount = amount;
             });
-           
+
             db.SaveChanges();
             var users = db.Logins.ToList();
             ViewBag.Users = users;
-            return View(from Salespersondetail in db.Salespersondetails select Salespersondetail);
-           // return View();
+           
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult MakeSales()
@@ -112,6 +112,17 @@ namespace FoodInventory.Controllers
 
                     db.Entry(item).Property(i => i.Quantity).IsModified = true;
                     db.SaveChanges();
+                    db.Stock_Detail.Add(new Stock_Detail
+                    {
+
+                        Date = DateTime.Now,
+                        Time = DateTime.Now.ToString(),
+                        Itemno = item.Item_No,
+                        Quantity = item.Quantity,
+
+
+                    });
+                    db.SaveChanges();
 
                     ViewBag.Success = "Updated successfully.";
                 }
@@ -123,9 +134,26 @@ namespace FoodInventory.Controllers
 
             return View();
         }
+        public ActionResult MostFrequent()
+        {
+            var data = db.Sales_Detail.GroupBy(x => x.Item_No).Select(x =>
+              new
+              {
+                  Item_No = x.Key,
+                  Occurance = x.Count()
 
+              }).OrderByDescending(x => x.Occurance).
+            Select(x => new MostFrequent
+            {
+                Item_No = x.Item_No,
+                Item_Name = db.Items.FirstOrDefault(c => c.Item_No == x.Item_No).Item_Name
+            }).
+            Take(5).ToList();
+            //ViewBag.Data = data;
+            return PartialView("_MostFrequent", data);
+        }
         [HttpPost]
-        public ActionResult SearchItem(int? itemNo)
+        public ActionResult SearchItem(long? itemNo)
         {
             Item item = db.Items.FirstOrDefault(i => i.Item_No == itemNo);
 
@@ -167,8 +195,8 @@ namespace FoodInventory.Controllers
         {
             try
             {
-                //List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code) && from >= x.Sale_Date && to <= x.Sale_Date ).ToList();
-                List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code)).ToList();
+                List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => from <= x.Sale_Date && to >= x.Sale_Date).ToList();
+                //  List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code)).ToList();
 
                 if (sales.Count < 1)
                 {
@@ -203,7 +231,7 @@ namespace FoodInventory.Controllers
         {
             try
             {
-                //List<Sales_Detail> sales = db.Sales_Detail.ToList().Where(x => x.Item_No.ToString().Equals(code) && from >= x.Sale_Date && to <= x.Sale_Date).ToList();
+
                 List<Stock_Detail> stocks = db.Stock_Detail.ToList().Where(x => x.Itemno.ToString().Equals(code)).ToList();
 
                 if (stocks.Count < 1)
@@ -295,7 +323,7 @@ namespace FoodInventory.Controllers
             {
                 Salespersondetail item = db.Salespersondetails.Find(newItem.Salesperson);
 
-                
+
             }
             catch (Exception ex)
             {
@@ -322,8 +350,8 @@ namespace FoodInventory.Controllers
         {
             try
             {
-                var list = db.Salespersondetails.Where(x => x.Loginammount > 15).ToList();
-                return PartialView("_LargeAmount",list);
+                var list = db.Salespersondetails.Where(x => x.Loginammount > 1000).ToList();
+                return PartialView("_LargeAmount", list);
             }
             catch (Exception)
             {
@@ -331,9 +359,26 @@ namespace FoodInventory.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public ActionResult ThreshholdQuantity()
+        {
+            if (Session["U_Name"] != null)
+            {
+                try
+                {
+                    var list = db.Items.Where(x => x.Threshhold_Quantity >=x.Quantity).ToList();
+                    return PartialView("ThreshholdQuantity", list);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+            return PartialView("ThreshholdQuantity", null);
+
+            ///return RedirectToAction("Index", "Login");
+        }
     }
-
-   
-
-
 }

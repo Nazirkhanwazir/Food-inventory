@@ -11,17 +11,32 @@ namespace FoodInventory.Controllers
     public class WebApiController : ApiController
     {
         POS_InventoryEntities1 db = new POS_InventoryEntities1();
-        
-        [HttpGet]
-        public HttpResponseMessage SearchItem(long itemNo) {
+
+       [HttpGet]
+        public HttpResponseMessage searchitem(long itemno) {
             try {
-                Item item = db.Items.First(i => i.Item_No == itemNo);
+                Item item = db.Items.First(i => i.Item_No == itemno);
+
+               return Request.CreateResponse(HttpStatusCode.OK, item);
+          } catch(Exception ex) {
+               return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+           }
+        }
+        [HttpGet]
+        public HttpResponseMessage SearchItemName(string itemName)
+        {
+            try
+            {
+                Item item = db.Items.First(i => i.Item_Name == itemName);
 
                 return Request.CreateResponse(HttpStatusCode.OK, item);
-            } catch(Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
 
         [HttpPost]
         public HttpResponseMessage MakeSale(List<Sales_Detail> saleDetail) {

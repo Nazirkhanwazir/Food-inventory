@@ -159,6 +159,7 @@
     <Compile Include="Models\Login.cs">
       <DependentUpon>POSInventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MostFrequent.cs" />
     <Compile Include="Models\POSInventory.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -257,6 +258,8 @@
     <Content Include="Views\Home\EditItem.cshtml" />
     <Content Include="Views\Home\SalePersonDetails.cshtml" />
     <Content Include="Views\Home\_LargeAmount.cshtml" />
+    <Content Include="Views\Home\ThreshholdQuantity.cshtml" />
+    <Content Include="Views\Home\_MostFrequent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -15,6 +15,15 @@
         </div>
     </div>
     <div class="row">
+       
+           <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Frequent used Items</div>
+                <div class="card-body">
+                    @Html.Action("MostFrequent", "Home")
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             @* Search Item *@
             <div class="card">
@@ -22,13 +31,21 @@
                 <div class="card-body">
                     <form id="search-item">
                         <div class="input-group">
-                            <input type="number" name="itemNo" class="form-control" placeholder="Item No" required>
+                            <input type="text"  name="itemName" class="form-control" placeholder="Item No" required>
+                            
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">Search</button>
                                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#barcode-scan">Scan</button>
                             </div>
                         </div>
                     </form>
+                    <div>
+                     <label>Discount %</label>
+                      <input type="number" placeholder="Enter sale percentage" class="form-control"  name="name" value="0" id="sale" />
+                  </div>
+
+
+                   
                 </div>
             </div>
         </div>
@@ -44,33 +61,33 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col">
-            @* Add Items *@
-            <div class="card">
-                <div class="card-header">Products</div>
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr class="table-light">
-                                <th scope="col">#</th>
-                                <th scope="col">Item No</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Retail Price</th>
-                                <th scope="col">Product Quantity</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody id="items"></tbody>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" id="calculate">Calculate Bill</button>
+            <div class="row mt-4">
+                <div class="col">
+                    @* Add Items *@
+                    <div class="card">
+                        <div class="card-header">Products</div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-light">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Item No</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Retail Price</th>
+                                        <th scope="col">Product Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="items"></tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" id="calculate">Calculate Bill</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 </section>
 
 @section scripts {
@@ -143,6 +160,77 @@
             })
         }
 
+        function searchItemName(itemName) {
+            $.ajax({
+                url: "/api/webapi/SearchItemName?itemName=" + itemName,
+                type: "GET",
+                contenttype: "json",
+                success: function (res) {
+                    var found = items.find(i => i.Item_No == res.Item_No)
+
+                    if (found) {
+                        alert("This item already exists.");
+                        return;
+                    }
+
+                    items.push(res)
+
+                    var el = `<tr>
+                            <th scope="row">${items.length}</th>
+                            <td>${res["Item_No"]}</td>
+                            <td>${res["Item_Name"]}</td>
+                            <td>${res["Retail_Price"] ?? 0}</td>
+                            <td><input value="0" type="number" min="0" data-quantity class="form-control" /></td>
+                            <td>0</td>
+                            <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>`;
+
+                    $("#items").append(el)
+
+                    $("#items input").each(function () {
+                        $(this).on('keyup', function (e) {
+                            e.stopPropagation()
+                            var itemNo = $(this).parent().parent().children().first().next().html()
+                            var quantity = parseFloat($(this).val())
+                            var price = parseInt($(this).parent().prev().html())
+                            var totalElement = $(this).parent().next()
+
+                            var item = items.find(i => i.Item_No == itemNo)
+
+                            if (quantity > item.Quantity) {
+                                alert("Quantity cannot be greater than item's quantity");
+                                return
+                            }
+
+                            var total = price * quantity;
+
+                            totalElement.html(total)
+
+                            item.saleQuantity = quantity
+                            item.totalPrice = total;
+                        })
+                    })
+
+                    $("#items button").each(function () {
+                        $(this).on('click', function (e) {
+                            e.stopPropagation()
+                            var itemNo = $(this).parent().parent().children().first().next().html()
+                            items = items.filter(i => i.Item_No != itemNo)
+                            $(this).parent().parent().remove()
+                        })
+                    })
+                },
+                error: function (err) {
+                    alert("This item does not exist")
+                }
+            })
+        }
+
+        function _search(item) {
+            searchItem(item);
+        }
+
+
         $("#search-item").on('submit', function (e) {
             e.preventDefault()
 
@@ -151,12 +239,16 @@
             $.each($(this).serializeArray(), function (i, field) {
                 data[field.name] = field.value
             })
-
-            searchItem(data["itemNo"])
-        })
+            //change to searchItemName
+            searchItem(data["itemName"])
+        });
 
         $("#calculate").on('click', function (e) {
             var total = items.reduce((t, i) => t + i.totalPrice, 0)
+            var sale = $("#sale").val();
+            if (sale) {
+                total = total - ((parseFloat(sale) / 100) * total) 
+            }
             $("#bill").html(total);
 
             var saleDetail = items.map(i => ({

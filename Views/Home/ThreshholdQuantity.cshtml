@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "ThreshholdQuantity";
+}
+    @if (Model != null)
+    {
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-light">
+                            @*<th scope="col">Item Name</th>*@
+                            <th scope="col">Item No</th>
+                            <th></th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Threshhold Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @*<td>@item.Item_Name</td>*@
+                                <td>@item.Item_No</td>
+                                <td></td>
+                                <td>@(item.Quantity)</td>
+                                <td>@(item.Threshhold_Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+    }
+

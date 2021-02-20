@@ -1,0 +1,150 @@
+﻿@*@model IEnumerable<FoodInventory.Models.MostFrequent>*@
+@if (Session["U_Name"].Equals("Ali"))
+{
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-light">
+
+                <th scope="col">Item No</th>
+                <th scope="col">Item Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td onclick="_search(1098)">1098</td>
+                <td onclick="_search(1098)">Pepsi</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1111)">1111</td>
+                <td onclick="_search(1111)">Bombay Biryani</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1199)">1199</td>
+                <td onclick="_search(1199)">Pepsi 2.25ltr</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1202)">1202</td>
+                <td onclick="_search(1202)">Chicken Biryani</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1233)">1233</td>
+                <td onclick="_search(1233)">RosePetal Delux</td>
+
+            </tr>
+            
+
+        </tbody>
+    </table>
+
+
+
+}
+else if (Session["U_Name"].Equals("Haroon"))
+{
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-light">
+
+                <th scope="col">Item No</th>
+                <th scope="col">Item Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td onclick="_search(120)">120</td>
+                <td onclick="_search(120)">Pepsi 2.25ltr</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(789)">789</td>
+                <td onclick="_search(789)">Morinaga BF-1</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(987)">987</td>
+                <td onclick="_search(987)">LAYS</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1003)">1003</td>
+                <td onclick="_search(1003)">FruitaVital</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(1010)">1010</td>
+                <td onclick="_search(1010)">Shezan</td>
+
+            </tr>
+            
+
+        </tbody>
+    </table>
+
+}
+else
+{
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-light">
+
+                <th scope="col">Item No</th>
+                <th scope="col">Item Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td onclick="_search(123)">123</td>
+                <td onclick="_search(123)">Nestle water 1ltr</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(183)">321</td>
+                <td onclick="_search(321)"> LUX Soap</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(456)">456</td>
+                <td onclick="_search(456)">Dalda oil 1ltr</td>
+
+            </tr>
+            <tr>
+                <td onclick="_search(333)">654</td>
+                <td onclick="_search(333)">Colgate</td>
+
+            </tr>
+           
+
+        </tbody>
+    </table>
+}
+
+
+
+
+@*@foreach (var item in Model)
+    {
+    <tr>
+        <td onclick="_search(@item.Item_No)">
+            @item.Item_No*
+
+        </td>
+       <td>
+           @item.Item_Name
+       </td>
+    </tr>*@
+
+
+
+    </table>

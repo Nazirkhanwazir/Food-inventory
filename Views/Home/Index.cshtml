@@ -37,13 +37,13 @@
                             <div class="input-group">
                                 @if (false)
                                 {
-                                <select name="user">
-                                    @foreach (var item in ViewBag.Users)
-                                    {
-                                    <option value="@item.U_Name">@item.U_Name</option>
+                                    <select name="user">
+                                        @foreach (var item in ViewBag.Users)
+                                        {
+                                            <option value="@item.U_Name">@item.U_Name</option>
 
-                                    }
-                                </select>
+                                        }
+                                    </select>
                                 }
                                 <input name="amount" class="form-control" />
                                 <button type="submit" class="btn btn-success">Set</button>
@@ -60,9 +60,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Threshhold Alert</div>
+                    <div class="card-body">
+                        @Html.Action("ThreshholdQuantity", "Home")
+                    </div>
+                </div>
+            </div>
         </div>
 
-        
+
 
 
 
@@ -127,6 +135,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="card-img-top" style="height: 200px" src="~/images/iconfinder_growth_3890929.png">
+                    <div class="card-body">
+                        <h5 class="card-title">Threshhold Quantity</h5>
+                        <p class="card-text">Add new stock to the inventory.</p>
+                        <a href="@Url.Action("ThreshholdQuantity", "Home")" class="btn btn-primary">Threshhold Quantity</a>
+                    </div>
+                </div>
+            </div>
         </div>
+
     }
 </section>
